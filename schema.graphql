@@ -1,0 +1,40 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+
+type Event {
+    id: ID!
+    event_type: String!
+    title: String!
+    url: String
+    started_on: String!
+    finished_on: String!
+    username: String!
+    description: String
+}
+
+
+type EventResult {
+    success: Boolean!
+    errors: [String]
+    event: Event
+}
+
+type EventsResult {
+    success: Boolean!
+    errors: [String]
+    event: [Event]
+}
+
+type Query {
+    getUserEvents(username: String!): EventsResult!
+    getUserMonthlyEvents(username: String!, date: String!): EventsResult!
+}
+
+type Mutation {
+    createEvent(event_type: String!, title: String!, url: String, started_on: String!, finished_on: String!, username: String!, description: String): EventResult!
+    updateEvent(id: ID!, title: String, url: String, finished_on: String, description: String): EventResult!
+    deleteEvent(id: ID!): EventResult!
+}
